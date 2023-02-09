@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="keywords" content="Ascii,Encoder,Webcam,Image Processing">
+    <meta name="description" content="A simple Ascii Encoder">
+    <meta name="author" content="Philipp von Neffe">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ascii Encoder</title>
+
+    <!-- scripts -->
+    <script src="./scripts/ascii.js"></script>
+    <script src="./scripts/webcam.js"></script>
+</head>
+
+
+<body>
+    <header>Ascii Image Encoder</header>
+
+    <main>
+        <div class ="camera-controls">
+            <button id="camera-start">Show Camera</button>
+            <button id="camera-stop">Stop</button>
+            <select id="camera-select">
+            </select>
+        </div>
+
+        <video id="camera-feed" autoplay playsinline></video>
+    </main>
+</body>
+</html>
