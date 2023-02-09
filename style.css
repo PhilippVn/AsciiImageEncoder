@@ -1,0 +1,38 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  header {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 36px;
+  }
+  
+  .camera-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+  }
+  
+  #camera-start, #camera-stop {
+    margin: 0 10px;
+  }
+  
+  .stream {
+    display: flex;
+    margin-top: 50px;
+  }
+  
+  #camera-feed, #canvas-video {
+    width: 100%;
+    height: auto;
+    margin: 0 10px;
+  }
+
+  @media (max-width: 768px) {
+    video, canvas {
+      width: 50%;
+    }
+  }

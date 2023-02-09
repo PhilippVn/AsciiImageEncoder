@@ -12,6 +12,9 @@
     <!-- scripts -->
     <script src="./scripts/ascii.js"></script>
     <script src="./scripts/webcam.js"></script>
+
+    <!--style sheets-->
+    <link rel="stylesheet" type="text/css" href="./style.css">
 </head>
 
 
@@ -26,7 +29,11 @@
             </select>
         </div>
 
-        <video id="camera-feed" autoplay playsinline></video>
+        <div class="stream">
+            <video id="camera-feed" autoplay playsinline>No active video stream</video>
+            <canvas id="ascii-canvas"></canvas>
+        </div>
+
     </main>
 </body>
 </html>
