@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     const buttonStart = document.getElementById('camera-start');
     const buttonStop = document.getElementById('camera-stop');
     const select = document.getElementById("camera-select");
+    const canvas = document.getElementById('ascii-canvas');
     let currentStream;
 
     // helper function to stop a video stream
@@ -14,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
           
         });
         video.hidden = true;
+        canvas.hidden = true;
       }
 
     // stop button
@@ -44,6 +46,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     // start button -> grab live camera feed
     buttonStart.addEventListener("click", function() {
         video.hidden = false;
+        canvas.hidden = false;
+
         var selectedDeviceId = select.value;
         var constraints = {
         video: { deviceId: selectedDeviceId }
@@ -55,7 +59,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
             video.play();
 
             // process the images of the live camera feed and do ascii magic
-            encodeAscii(stream);
+            console.log("Getting Camera live feed...");
+            
+            processVideo(video,canvas);
+            console.log("Processing Frames...");
         })
         .catch(function(error) {
             console.error("Error accessing webcam:", error);
