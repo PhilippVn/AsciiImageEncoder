@@ -19,16 +19,16 @@ function convertToASCII(imageData){
     // grey scales by weighting according to human color perception
     function greyScale(){
         const grayScales = []; // grayscale values
-        for (j=0; j<imageData.height; j++)
+        for (j=0; j<imageData.height; j+=8)
         {
-            for (i=0; i<imageData.width; i++) // lower resolution
+            for (i=0; i<imageData.width; i+=8)
             {
                 var index=(j*4)*imageData.width+(i*4);
                 var red=imageData.data[index];
                 var green=imageData.data[index+1];
                 var blue=imageData.data[index+2];
                 var alpha=imageData.data[index+3];
-
+        
                 let weightedAvg = 0.2989 * red + 0.587 * green + 0.1130 * blue;
                 grayScales.push(weightedAvg);
             }
@@ -46,21 +46,17 @@ function convertToASCII(imageData){
 
 
     const getAscii = grayScales => {
+        let nextChars = "";
         let row = 0;
-        let column = 0;
-        // generate ascii string
-        const ascii = grayScales.reduce((asciiImage, grayScale, index) => {
-            let nextChars = getCharacterForGrayScale(grayScale);
-        
-            if ((index + 1) % imageData.width === 0) {
+        for (let index = 0; index < grayScales.length; index++) {
+            nextChars += getCharacterForGrayScale(grayScales[index]);
+            if ((index + 1) % (imageData.width/8) === 0) {
               nextChars += "\n";
+              row++;
             }
-        
-            return asciiImage + nextChars;
-          }, "");
-        return ascii;
-      };
-    
+        }
+        return nextChars;
+    }
     return getAscii(grayScales);
 }
 
@@ -104,11 +100,11 @@ function processVideo(video, canvas) {
             const asciiString = convertToASCII(imageData);
 
             // render ASCII text to the visible canvas
-            ctx.font = "5px monospace";
+            ctx.font = "15px monospace"; // width of every character is the same
             var lines = asciiString.split("\n");
             ctx.clearRect(0, 0, width, height);
             for (var i = 0; i < lines.length; i++) {
-                ctx.fillText(lines[i], 0, i * 5);
+                ctx.fillText(lines[i], 0, i * 9);
             }
 
             if(shouldRender){ // only render next frame if it still should render
