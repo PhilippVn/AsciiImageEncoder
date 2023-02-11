@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         });
         video.hidden = true;
         canvas.hidden = true;
+        shouldRender =false;
       }
 
     // stop button
@@ -61,6 +62,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             // process the images of the live camera feed and do ascii magic
             console.log("Getting Camera live feed...");
             
+            shouldRender = true;
             processVideo(video,canvas);
             console.log("Processing Frames...");
         })
